@@ -1,0 +1,4 @@
+# source .profile
+
+export CPLUS_INCLUDE_PATH=$CPLUS_INCLUDE_PATH:${PWD}/3rd/cutlass/include
+
