@@ -1,3 +1,9 @@
 3rd/cutlass
 cute_tensor_simple
 cute_gemm_simple
+tiled_copy
+
+*.aux
+*.tex
+*.pdf
+*.log
