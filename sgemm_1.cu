@@ -399,9 +399,9 @@ int main(int argc, char **argv) {
     }
 
     if (transB == 'N') {
-        ldB = m;
-    } else if (transB == 'T') {
         ldB = k;
+    } else if (transB == 'T') {
+        ldB = n;
     } else {
         assert(false);
     }
