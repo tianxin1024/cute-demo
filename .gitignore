@@ -9,3 +9,4 @@ tiled_copy
 *.log
 sgemm_1
 sgemm_2
+bin
