@@ -135,6 +135,7 @@ __global__ static __launch_bounds__(decltype(size(
 
     // Copy Atom retiling
     TiledCopy s2r_copy_a = make_tiled_copy_A(s2r_atom_a, mma);
+    // TiledCopy s2r_copy_a = make_tiled_copy_A(s2r_copy_atom{}, mma);
     ThrCopy s2r_thr_copy_a = s2r_copy_a.get_slice(threadIdx.x);
     Tensor tXsA = s2r_thr_copy_a.partition_S(sA); // (CPY, MMA_M, MMA_K, PIPE)
     Tensor tXrA = s2r_thr_copy_a.retile_D(tCrA);  // (CPY, MMA_M, MMA_K)
@@ -240,7 +241,6 @@ void gemm(char transA, char transB, int m, int n, int k, Alpha alpha,
 }
 
 int main(int argc, char **argv) {
-#if 0
     cudaDeviceProp props;
     cudaError_t error = cudaGetDeviceProperties(&props, 0);
     if (error != cudaSuccess) {
@@ -277,13 +277,13 @@ int main(int argc, char **argv) {
     if (argc >= 6)
         sscanf(argv[5], "%c", &transB);
 
-    using TA = float;
-    using TB = float;
-    using TC = float;
-    using TI = float;
+    using TA = cute::half_t;
+    using TB = cute::half_t;
+    using TC = cute::half_t;
+    using TI = cute::half_t;
 
-    TI alpha = 1.0;
-    TI beta = 0.0;
+    TI alpha = static_cast<TI>(1.0f);
+    TI beta = static_cast<TI>(0.0f);
 
     std::cout << "M = " << m << std::endl;
     std::cout << "N = " << n << std::endl;
@@ -338,6 +338,5 @@ int main(int argc, char **argv) {
     CUTE_CHECK_LAST();
     thrust::host_vector<TC> cute_result = d_C;
 
-#endif
     return 0;
 }
