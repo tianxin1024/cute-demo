@@ -166,8 +166,8 @@ void layout_composition_1() {
 int main(int argc, char **argv) {
     layout_coalesce(); // coalesce
     layout_composition();
-
     // (10, 2):(16, 4) o (5, 4):(1, 5)
     layout_composition_1();
+
     return 0;
 }
