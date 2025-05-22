@@ -19,6 +19,10 @@ $(BIN_DIR)/%: $(SRC_DIR)/%.cu
 		--expt-relaxed-constexpr -cudart shared --cudadevrt none \
 		-lcublasLt -lcublas -ldl
 
+test :
+	@nvcc -o ./bin/test src/test.cu -O2 -arch=sm_86 -std=c++17 -I3rd/cutlass/include \
+		--expt-relaxed-constexpr -ldl && ./bin/test
+
 # Clean target
 clean:
 	rm -rf $(BIN_DIR)/*
